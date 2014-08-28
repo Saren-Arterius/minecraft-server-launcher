@@ -85,8 +85,7 @@ Example systemd service file
 ```
 [Unit]
 Description=All Minecraft servers
-Requires=network.target
-After=dhcpcd.service
+After=network.target
 
 [Service]
 Type=oneshot
