@@ -3,6 +3,10 @@ Minecraft Server Launcher
 
 A Minecraft server(s) launcher written in Python.
 
+Dependencies
+=========================
+- Any linux distro with python3 installed
+- python3: screenutils
 
 Usage
 =========================
