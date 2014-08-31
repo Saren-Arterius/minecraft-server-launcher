@@ -15,6 +15,28 @@ MCSERVER_LAUNCHER = "mcserver-launcher"
 has_args = False
 
 
+class SendCommand(argparse.Action):
+    def __init__(self, option_strings, dest, **kwargs):
+        super(SendCommand, self).__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string = None):
+        global has_args
+        has_args = True
+        success = False
+        if len(values) <= 1:
+            print("There must be at least 2 arguments.")
+            return
+        for screen in list_screens():
+            if screen.name == "mcs-{0}".format(values[0]):
+                success = True
+                screen.send_commands("")
+                screen.send_commands(" ".join(values[1:]))
+        if success:
+            print("Successfully sent '{0}' to minecraft server {1}.".format(" ".join(values[1:]), values[0]))
+        else:
+            print("Minecraft server {0} not found.".format(values[0]))
+
+
 class StartAll(argparse.Action):
     def __init__(self, option_strings, dest, **kwargs):
         super(StartAll, self).__init__(option_strings, dest, **kwargs)
@@ -79,10 +101,10 @@ class TerminateServer(argparse.Action):
         success = False
         for screen in list_screens():
             if screen.name == "mcs-{0}".format(values):
-                pid = int(check_output(
-                    "ps aux | grep {0} | grep python | grep {1} | grep -v grep | awk '{{print $2}}'".format(values,
-                                                                                                            MCSERVER_WRAPPER),
-                    shell = True).decode())
+                cmd = "ps aux | grep {0}$ | grep python | grep {1} " \
+                      "| grep -v grep | awk '{{print $2}}'".format(values, MCSERVER_WRAPPER)
+                result = check_output(cmd, shell = True).decode()
+                pid = int(result)
                 while screen.exists:
                     call(["kill", str(pid)])
                     sleep(1)
@@ -132,6 +154,8 @@ if __name__ == "__main__":
                         help = 'Starts a server.', action = StartServer)
     parser.add_argument('-t', '--terminate-server', metavar = 'IDENT', type = str,
                         help = 'Terminates a server.', action = TerminateServer)
+    parser.add_argument('-c', '--send-command', metavar = 'IDENT_AND_COMMAND', type = str,
+                        help = 'Sends a command to the screen.', action = SendCommand, nargs = '+')
     parser.add_argument('--start-all',
                         help = 'Starts all servers.', action = StartAll, nargs = '?', )
     parser.add_argument('--terminate-all',
