@@ -36,6 +36,7 @@ optional arguments:
   --terminate-all [TERMINATE_ALL]
                         Terminates all servers.
 ```
+`$ mcserver-wrapper`
 ```
 usage: mcserver-wrapper [-h] IDENT
 
