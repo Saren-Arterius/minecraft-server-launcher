@@ -1,0 +1,11 @@
+[Unit]
+Description=All Minecraft servers
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/mcserver-launcher --start-all
+ExecStop=/usr/bin/mcserver-launcher --terminate-all
+
+[Install]
+WantedBy=multi-user.target
