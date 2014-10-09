@@ -18,6 +18,7 @@ Usage
 `$ mcserver-launcher`
 ```
 usage: mcserver-launcher [-h] [-a IDENT] [-s IDENT] [-t IDENT]
+                         [-c IDENT_AND_COMMAND [IDENT_AND_COMMAND ...]]
                          [--start-all [START_ALL]]
                          [--terminate-all [TERMINATE_ALL]]
 
@@ -31,10 +32,13 @@ optional arguments:
                         Starts a server.
   -t IDENT, --terminate-server IDENT
                         Terminates a server.
+  -c IDENT_AND_COMMAND [IDENT_AND_COMMAND ...], --send-command IDENT_AND_COMMAND [IDENT_AND_COMMAND ...]
+                        Sends a command to the screen.
   --start-all [START_ALL]
                         Starts all servers.
   --terminate-all [TERMINATE_ALL]
                         Terminates all servers.
+
 ```
 `$ mcserver-wrapper`
 ```
