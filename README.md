@@ -5,11 +5,17 @@ A Minecraft server(s) launcher written in Python.
 
 Dependencies
 =========================
-- Any linux distro with python3 installed
-- python3: screenutils
+- Any linux distro with python3 and GNU screen installed
+- python3: screenutils (`$ pip install screenutils`)
+
+Installation
+=========================
+1. `# mv mcserver-launcher.py /usr/bin/mcserver-launcher; mv mcserver-wrapper.py /usr/bin/mcserver-wrapper`
+2. `# chmod +x /usr/bin/mcserver-launcher /usr/bin/mcserver-wrapper`
 
 Usage
 =========================
+`$ mcserver-launcher`
 ```
 usage: mcserver-launcher [-h] [-a IDENT] [-s IDENT] [-t IDENT]
                          [--start-all [START_ALL]]
@@ -100,3 +106,4 @@ RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
 ```
+
