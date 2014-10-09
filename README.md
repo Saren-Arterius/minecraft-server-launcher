@@ -97,18 +97,4 @@ AutoStart = False
 
 Example systemd service file
 =========================
-```
-[Unit]
-Description=All Minecraft servers
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/mcserver-launcher --start-all
-ExecStop=/usr/bin/mcserver-launcher --terminate-all
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-```
-
+See minecraft-servers.service
